@@ -23,10 +23,10 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-      <Head :title="'Forgot Password'" />
+      <Head :title="'Olvidó su contraseña'" />
   
       <div class="mb-4 text-sm text-gray-600">
-        Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+        Si olvidó su contraseña, coloque su correo y inmediatamente recibirá un correo electrónico con pasos a seguir para reiniciar su contraseña.
       </div>
   
       <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -35,7 +35,7 @@ const submit = () => {
   
       <form @submit.prevent="submit">
         <div class="mb-3">
-          <label for="email" :class="{'form-label': true, 'is-invalid': form.errors.email}" class="form-label">Email</label>
+          <label for="email" :class="{'form-label': true, 'is-invalid': form.errors.email}" class="form-label">Correo</label>
   
           <input
             id="email"
@@ -55,7 +55,7 @@ const submit = () => {
   
         <div class="d-flex justify-content-end mt-4">
             <button type="submit" class="btn btn-primary" :disabled="form.processing">
-                Email Password Reset Link
+                Enviar Correo
             </button>
 
         </div>

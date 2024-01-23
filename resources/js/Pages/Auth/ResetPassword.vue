@@ -37,7 +37,7 @@ const submit = () => {
             <div class="col-md-6">
                 <form @submit.prevent="submit" class="mt-4">
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Correo</label>
                         <input
                             id="email"
                             type="email"
@@ -53,7 +53,7 @@ const submit = () => {
                     </div>
 
                     <div class="form-group mt-4">
-                        <label for="password">Password</label>
+                        <label for="password">Contraseña</label>
                         <input
                             id="password"
                             type="password"
@@ -69,7 +69,7 @@ const submit = () => {
 
                     <div class="form-group mt-4">
                         <label for="password_confirmation"
-                            >Confirm Password</label
+                            >Confirmar Contraseña</label
                         >
                         <input
                             id="password_confirmation"
@@ -90,7 +90,7 @@ const submit = () => {
                             class="btn btn-primary"
                             :disabled="form.processing"
                         >
-                            Reset Password
+                            Resetear Contraseña
                         </button>
                     </div>
                 </form>

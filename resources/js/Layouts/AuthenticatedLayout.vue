@@ -24,7 +24,7 @@ const showingNavigationDropdown = ref(false);
                     <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" :href="route('dashboard')" :active="route().current('dashboard')">Dashboard</a>
+                                <a class="nav-link" :href="route('dashboard')" :active="route().current('dashboard')">Inicio</a>
                             </li>
                         </ul>
                     </div>
@@ -38,10 +38,10 @@ const showingNavigationDropdown = ref(false);
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" :href="route('profile.edit')">Profile</a>
+                                    <a class="dropdown-item" :href="route('profile.edit')">Perfil</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" :href="route('logout')" method="post">Logout</a>
+                                    <a class="dropdown-item" :href="route('logout')" method="post">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </div>

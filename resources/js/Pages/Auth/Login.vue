@@ -31,7 +31,7 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Inicio de Sesión" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-success">
             {{ status }}
@@ -39,7 +39,7 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">Correo</label>
                 <input
                     id="email"
                     type="email"
@@ -53,7 +53,7 @@ const submit = () => {
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Contraseña</label>
                 <input
                     id="password"
                     type="password"
@@ -73,7 +73,7 @@ const submit = () => {
                     v-model="form.remember"
                 />
                 <label for="remember" class="form-check-label"
-                    >Remember me</label
+                    >Recuérdame</label
                 >
             </div>
 
@@ -83,14 +83,14 @@ const submit = () => {
                     :href="route('password.request')"
                     class="text-decoration-underline text-gray-600"
                 >
-                    Forgot your password?
+                    ¿Olvidaste tu contraseña?
                 </a>
                 <button
                     class="btn btn-primary ms-4"
                     :class="{ disabled: form.processing }"
                     :disabled="form.processing"
                 >
-                    Log in
+                    Iniciar Sesión
                 </button>
             </div>
         </form>

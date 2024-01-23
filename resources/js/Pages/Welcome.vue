@@ -20,7 +20,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Bienvenido" />
 
     <div class="container">
         <div class="row justify-content-center">
@@ -28,9 +28,9 @@ defineProps({
                 <!-- Right-aligned content -->
                 <!-- Use Bootstrap buttons for the links -->
                 <!-- Replace Link component with anchor tags -->
-                <a v-if="$page.props.auth.user" :href="route('dashboard')" class="btn btn-primary me-4">Dashboard</a>
-                <a v-else :href="route('login')" class="btn btn-primary me-4">Log in</a>
-                <a v-if="canRegister" :href="route('register')" class="btn btn-secondary">Register</a>
+                <a v-if="$page.props.auth.user" :href="route('dashboard')" class="btn btn-primary me-4">Inicio</a>
+                <a v-else :href="route('login')" class="btn btn-primary me-4">Iniciar Sesión</a>
+                <a v-if="canRegister" :href="route('register')" class="btn btn-secondary">Registro</a>
             </div>
         </div>
 

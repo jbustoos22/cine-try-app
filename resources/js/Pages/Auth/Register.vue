@@ -21,14 +21,15 @@ const submit = () => {
 </script>
 
 <template>
+    <Head :title="'Registro'" />
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h1 class="mt-5 mb-4">Register</h1>
+                <h1 class="mt-5 mb-4">Registro</h1>
 
                 <form @submit.prevent="submit">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">Nombre</label>
                         <input
                             id="name"
                             type="text"
@@ -42,7 +43,7 @@ const submit = () => {
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Correo</label>
                         <input
                             id="email"
                             type="email"
@@ -53,9 +54,33 @@ const submit = () => {
                         />
                         <div class="text-danger">{{ form.errors.email }}</div>
                     </div>
+                    <div class="row">
+
+                        <div class="mb-3 col-sm-4">
+                            <label for="Pais" class="form-label">Pais</label>
+                            <select name="pais" id="pais" class="form-select">
+                                <option value="">Venezuela</option>
+                        </select>
+                        <div class="text-danger">{{ form.errors.Pais }}</div>
+                    </div>
+                    <div class="mb-3 col-sm-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select name="estado" id="estado" class="form-select">
+                            <option value="">Carabobo</option>
+                        </select>
+                        <div class="text-danger">{{ form.errors.estado }}</div>
+                    </div>
+                    <div class="mb-3 col-sm-4">
+                        <label for="ciudad" class="form-label">Ciudad</label>
+                        <select name="ciudad" id="ciudad" class="form-select">
+                            <option value="">Valencia</option>
+                        </select>
+                        <div class="text-danger">{{ form.errors.ciudad }}</div>
+                    </div>
+                </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">Contraseña</label>
                         <input
                             id="password"
                             type="password"
@@ -68,7 +93,7 @@ const submit = () => {
                     </div>
 
                     <div class="mb-3">
-                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                        <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
                         <input
                             id="password_confirmation"
                             type="password"
@@ -81,7 +106,7 @@ const submit = () => {
                     </div>
 
                     <div class="mb-3">
-                        <a :href="route('login')">Already registered?</a>
+                        <a :href="route('login')">¿Ya estás registrado?</a>
                         <button class="btn btn-primary ms-3" :disabled="form.processing">
                             Register
                         </button>
