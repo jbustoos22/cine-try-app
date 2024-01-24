@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class Sala extends Model
 {
     use HasFactory;
 
+    protected $table = 'salas';
     protected $fillable = [
-        'name',
-        'region_id',
-        'country_id',
-        'latitude',
-        'longitude'
+        'numero',
+        'tipo',
+        'aforo',
+        'desde',
+        'hasta',
+        'id_pelicula'
     ];
-
 }

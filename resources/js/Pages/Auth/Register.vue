@@ -10,7 +10,7 @@ const form = useForm({
     name: '',
     email: '',
     password: '',
-    password_confirmation: '',
+    password_confirmation: ''
 });
 
 const submit = () => {
@@ -54,30 +54,6 @@ const submit = () => {
                         />
                         <div class="text-danger">{{ form.errors.email }}</div>
                     </div>
-                    <div class="row">
-
-                        <div class="mb-3 col-sm-4">
-                            <label for="Pais" class="form-label">Pais</label>
-                            <select name="pais" id="pais" class="form-select">
-                                <option value="">Venezuela</option>
-                        </select>
-                        <div class="text-danger">{{ form.errors.Pais }}</div>
-                    </div>
-                    <div class="mb-3 col-sm-4">
-                        <label for="estado" class="form-label">Estado</label>
-                        <select name="estado" id="estado" class="form-select">
-                            <option value="">Carabobo</option>
-                        </select>
-                        <div class="text-danger">{{ form.errors.estado }}</div>
-                    </div>
-                    <div class="mb-3 col-sm-4">
-                        <label for="ciudad" class="form-label">Ciudad</label>
-                        <select name="ciudad" id="ciudad" class="form-select">
-                            <option value="">Valencia</option>
-                        </select>
-                        <div class="text-danger">{{ form.errors.ciudad }}</div>
-                    </div>
-                </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
@@ -107,9 +83,9 @@ const submit = () => {
 
                     <div class="mb-3">
                         <a :href="route('login')">¿Ya estás registrado?</a>
-                        <button class="btn btn-primary ms-3" :disabled="form.processing">
+                        <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                             Register
-                        </button>
+                        </PrimaryButton>
                     </div>
                 </form>
             </div>

@@ -29,15 +29,34 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $validatedData = $request->validated();
+        // dd($validatedData);
+        // exit;
+        // Obtiene el usuario actual
+        $user = $request->user();
+        
+        // dd($user);
+        // exit;
+        // Actualiza la información del perfil
+        $user->fill([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'cedula' => $validatedData['cedula'],
+            'telefono' => $validatedData['telefono'],
+            'pais' => $validatedData['pais'],
+            'ciudad' => $validatedData['ciudad'],
+            'estado' => $validatedData['estado']
+        ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        // dump($request->hasFile('foto'));
+        // exit;
+        // Verifica si se ha subido una nueva imagen
 
-        $request->user()->save();
+        // Guarda los cambios en el perfil
+        $user->save();
 
-        return Redirect::route('profile.edit');
+        // Redirecciona a la página de edición del perfil
+        return redirect()->route('profile.edit')->with('success', 'Perfil actualizado correctamente');
     }
 
     /**

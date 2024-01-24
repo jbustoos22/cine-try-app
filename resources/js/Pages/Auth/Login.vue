@@ -90,7 +90,7 @@ const submit = () => {
                     :class="{ disabled: form.processing }"
                     :disabled="form.processing"
                 >
-                    Iniciar Sesión
+                    Iniciar
                 </button>
             </div>
         </form>
