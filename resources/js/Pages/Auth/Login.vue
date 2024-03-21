@@ -85,6 +85,13 @@ const submit = () => {
                 >
                     ¿Olvidaste tu contraseña?
                 </a>
+                <a
+                    v-if="canResetPassword"
+                    :href="route('register')"
+                    class="text-decoration-underline text-gray-600"
+                >
+                    Registrate
+                </a>
                 <button
                     class="btn btn-primary ms-4"
                     :class="{ disabled: form.processing }"

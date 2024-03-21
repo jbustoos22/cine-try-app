@@ -1,28 +1,68 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm, usePage } from "@inertiajs/vue3";
 import axios from "axios";
+
+
+const { pelicula } = usePage().props;
+const form = useForm({
+    nombre: pelicula.nombre,
+    genero: pelicula.genero,
+    clase: pelicula.clase,
+    descripcion: pelicula.descripcion,
+    idioma: pelicula.idioma,
+    color: pelicula.color,
+    imagen: null,
+    processing: false,
+});
+
+const submitForm = async () => {
+    form.processing = true;
+
+    try {
+        const formData = new FormData();
+        formData.append('nombre', form.nombre);
+        formData.append('genero', form.genero);
+        formData.append('clase', form.clase);
+        formData.append('descripcion', form.descripcion);
+        formData.append('idioma', form.idioma);
+        formData.append('color', form.color);
+        formData.append('imagen', form.imagen);
+
+        await axios.post(`/peliculas/update/${pelicula.id}`, formData);
+
+        window.location.replace('http://127.0.0.1:8000/admpelis')
+        // Manejar la respuesta o redireccionar a otra página
+    } catch (error) {
+        // Manejar el error, por ejemplo, mostrar un mensaje de error
+    }
+
+    form.processing = false;
+};
+
+const onFileChange = (e) => {
+    const file = e.target.files[0];
+    form.imagen = file;
+};
 </script>
 
 <template>
-    <Head :title="'Crear Película'" />
+    <Head :title="'Actualizar Película'" />
     <div class="container bg-light">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h1 class="mt-5 mb-4">Registro de Película</h1>
+                <h1 class="mt-5 mb-4">Actualizar Película</h1>
 
                 <form @submit.prevent="submitForm">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre de la Película</label>
+                        <label for="nombre" class="form-label"
+                            >Nombre de la Película</label
+                        >
                         <input
                             id="nombre"
                             type="text"
                             class="form-control"
-                            v-model="pelicula.nombre"
+                            v-model="form.nombre"
                             required
                             autofocus
                         />
@@ -33,7 +73,7 @@ import axios from "axios";
                         <select
                             id="genero"
                             class="form-select"
-                            v-model="pelicula.genero"
+                            v-model="form.genero"
                             required
                         >
                             <option>Acción</option>
@@ -64,7 +104,7 @@ import axios from "axios";
                         <select
                             id="clase"
                             class="form-select"
-                            v-model="pelicula.clase"
+                            v-model="form.clase"
                             required
                         >
                             <option value="A">A</option>
@@ -81,7 +121,7 @@ import axios from "axios";
                             id="descripcion"
                             type="text"
                             class="form-control"
-                            v-model="pelicula.descripcion"
+                            v-model="form.descripcion"
                             required
                         />
                     </div>
@@ -91,7 +131,7 @@ import axios from "axios";
                         <select
                             id="idioma"
                             class="form-select"
-                            v-model="pelicula.idioma"
+                            v-model="form.idioma"
                             required
                         >
                             <option value="Español">Español</option>
@@ -117,7 +157,7 @@ import axios from "axios";
                             id="color"
                             type="text"
                             class="form-control"
-                            v-model="pelicula.color"
+                            v-model="form.color"
                             required
                         />
                     </div>
@@ -135,38 +175,3 @@ import axios from "axios";
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    data() {
-        return {
-            pelicula: {
-                nombre: "",
-                genero: "",
-                clase: "",
-                descripcion: "",
-                idioma: "",
-                imagen: null,
-                color: '',
-            },
-            form: {
-                processing: false,
-            },
-        };
-    },
-    methods: {
-        onFileChange(e) {
-            this.pelicula.imagen = e.target.files[0];
-        },
-        submitForm() {
-            this.form.processing = true;
-
-            this.$inertia
-                .post(route("pelicula.crear"), this.pelicula)
-                .then(() => {
-                    this.form.processing = false;
-                });
-        },
-    },
-};
-</script>

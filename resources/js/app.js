@@ -1,7 +1,5 @@
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import '../css/app.css';
-
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -22,3 +20,4 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+

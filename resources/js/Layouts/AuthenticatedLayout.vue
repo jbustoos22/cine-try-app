@@ -1,64 +1,100 @@
 <script setup>
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { ref } from "vue";
 
-const showingNavigationDropdown = ref(false);
+import { usePage } from "@inertiajs/vue3";
+
+const showingDropdown = ref(false);
+const { props } = usePage();
+
+// Accede a la información de sesión del usuario desde las propiedades proporcionadas por Inertia
+const user = props.auth.user;
+
+// Comprueba si el usuario es administrador
+const isAdmin = ref(user.rango === "Administrador");
 </script>
 
 <template>
     <div>
-        <div class="min-vh-100 bg-light dark-bg-dark">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark dark-bg-dark border-bottom border-light dark-border-dark" style="color: white">
+        <div class="min-vh-100 bg-dark dark-bg-dark">
+            <nav
+                class="navbar navbar-expand-lg navbar-dark dark-border-dark"
+                style="color: white; background-color: black;"
+            >
                 <div class="container">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+                    <div
+                        class="collapse navbar-collapse justify-content-start"
+                        id="navbarNav"
+                    >
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" :href="route('dashboard')">Inicio</a>
+                                <a class="nav-link" :href="route('salas.ver')"
+                                    >🏯Inicio</a
+                                >
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" :href="route('salas.ver')">Ver Salas</a>
+                            <li v-if="isAdmin" class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    :href="route('pelicula.admin')"
+                                    >🍿Administrar Peliculas</a
+                                >
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" :href="route('sala.nuevo')">Crear Salas</a>
+                            <li v-if="isAdmin" class="nav-item">
+                                <a class="nav-link" :href="route('sala.admin')"
+                                    >🚪Administrar Salas</a
+                                >
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" :href="route('pelicula.nuevo')">Crear Pelicula</a>
+                            <li v-if="isAdmin" class="nav-item">
+                                <a class="nav-link" :href="route('comment.index')"
+                                    >💭Administrar Posts</a
+                                >
                             </li>
                         </ul>
                     </div>
                     <div class="ms-auto">
                         <div class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <p style="color:rgb(216, 25, 25)">{{ $page.props.auth.user.name }}</p>
-                                <svg style="color: white;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                </svg>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            @click="showingDropdown = !showingDropdown"
+                            >
+                            🧑🏻{{ $page.props.auth.user.name }}
+                        </a>
+                        <ul
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdown"
+                                :class="{ show: showingDropdown }"
+                            >
                                 <li>
-                                    <a class="dropdown-item" :href="route('profile.edit')">Perfil</a>
+                                    <a
+                                        class="dropdown-item"
+                                        :href="route('profile.edit')"
+                                        >🖋️Perfil</a
+                                    >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" :href="route('logout')" method="post">Cerrar Sesión</a>
+                                    <a
+                                        class="dropdown-item"
+                                        :href="route('logout')"
+                                        method="post"
+                                        >✖️Cerrar Sesión</a
+                                    >
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
-            <header class="dark-bg-dark shadow" v-if="$slots.header">
-            </header>
+            <header class="dark-bg-dark shadow" v-if="$slots.header"></header>
             <main>
                 <slot />
             </main>
         </div>
     </div>
 </template>
+<style>
+.nav-link {
+    color: white;
+}
+</style>

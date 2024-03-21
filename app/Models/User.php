@@ -25,7 +25,8 @@ class User extends Authenticatable
         'password',
         'pais',
         'estado',
-        'ciudad'
+        'ciudad',
+        'rango'
     ];
 
     /**

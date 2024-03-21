@@ -26,7 +26,6 @@ const submit = () => {
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1 class="mt-5 mb-4">Registro</h1>
-
                 <form @submit.prevent="submit">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>

@@ -38,9 +38,6 @@ defineProps({
                         <UpdatePasswordForm class="max-w-xl" />
                     </div>
 
-                    <div class="p-4 bg-white shadow-sm rounded-lg">
-                        <DeleteUserForm class="max-w-xl" />
-                    </div>
                 </div>
             </div>
         </div>

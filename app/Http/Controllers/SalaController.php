@@ -12,25 +12,42 @@ use Inertia\Inertia;
 class SalaController extends Controller
 {
     //
-    function index() {
-        return Inertia::render('Salas');
+    function index()
+    {
+        return Inertia::render('Vista/Salas', [
+            'user' => auth()->user(), // Aquí estás pasando la información de sesión del usuario como una propiedad llamada 'user'
+        ]);
     }
 
-    function crearSalaIndex() {
+    function crearSalaIndex()
+    {
         return Inertia::render('Auth/NewSala');
     }
-    function obtenerSalas() {
+    function updateSalaIndex()
+    {
+        return Inertia::render('Auth/UpdateSala');
+    }
+    function mapaAsientos()
+    {
+        return Inertia::render('Vista/Asientos', [
+            'user' => auth()->user()
+        ]);
+    }
+    function obtenerSalas()
+    {
         $salas = Sala::all();
 
         return response()->json(['salas' => $salas]);
     }
-    function obtenerSalaById($id) {
+    function obtenerSalaById($id)
+    {
         $salas = Sala::find($id);
 
         return response()->json(['salas' => $salas]);
     }
 
-    public function store(StoreSalaRequest $request): RedirectResponse {
+    public function store(StoreSalaRequest $request): RedirectResponse
+    {
         $validatedData = $request->validated();
 
         // dd($validatedData);
@@ -48,5 +65,12 @@ class SalaController extends Controller
         $sala->save();
 
         return redirect('dashboard');
+    }
+
+    function adminSalas()
+    {
+        return Inertia::render("Admin/AdminSalas", [
+            'user' => auth()->user(), // Aquí estás pasando la información de sesión del usuario como una propiedad llamada 'user'
+        ]);
     }
 }
